@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private VirtualJoystick joystick;
-
-    [Header("Player values")]
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+
+    [Header("Joystick")]
+    private VirtualJoystick joystick;
+
+    private void Awake()
+    {
+        joystick = FindObjectOfType<VirtualJoystick>();
+
+        if (joystick == null)
+            Debug.LogError("VirtualJoystick not found in scene!");
+    }
 
     private void Update()
     {
+        if (joystick == null) return;
+
         Vector2 input = joystick.InputVector;
         Vector3 movement = new Vector3(input.x, 0f, input.y);
 
