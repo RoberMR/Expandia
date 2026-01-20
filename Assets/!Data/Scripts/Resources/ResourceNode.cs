@@ -31,10 +31,7 @@ public class ResourceNode : MonoBehaviour
         {
             yield return new WaitForSeconds(intervalSeconds);
 
-            bool added = ResourceManager.Instance.Add(resourceType, 1);
-
-            if (!added) // Full inventory -> we wait for the next tick
-                yield return null;
+            ResourceManager.Instance.Add(resourceType, 1);
         }
     }
 }
