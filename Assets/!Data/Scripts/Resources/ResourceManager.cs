@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+
+    public event Action<ResourceType, int, int> OnResourceChanged;
 
     [Header("Inventory")]
     [SerializeField] private int maxCapacityPerResource = 10;
@@ -45,7 +48,13 @@ public class ResourceManager : MonoBehaviour
             return false;
 
         resources[type] += amount;
-        Debug.Log($"{type.displayName}: {resources[type]}");
+
+        OnResourceChanged?.Invoke(
+            type,
+            resources[type],
+            maxCapacityPerResource
+        );
+
         return true;
     }
 }

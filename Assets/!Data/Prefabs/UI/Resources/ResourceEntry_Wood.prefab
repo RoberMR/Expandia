@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6104966200834574567
+--- !u!1001 &4950188151519884101
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 200706693518048461, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
+      propertyPath: resourceType
+      value: 
+      objectReference: {fileID: 11400000, guid: a8b3f2b938c21b14880f37c0148939d4, type: 2}
     - target: {fileID: 315586379867738318, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -18,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 315586379867738318, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 315586379867738318, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -118,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704105361761245666, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2704105361761245666, guid: 53e78aacabf73ff4585bc315fd097447, type: 3}
       propertyPath: m_AnchoredPosition.x

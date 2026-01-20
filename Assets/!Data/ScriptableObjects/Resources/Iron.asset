@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceId: iron
   displayName: Iron
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f03742593ae4e0748a5c9fb8bae93f46, type: 3}
