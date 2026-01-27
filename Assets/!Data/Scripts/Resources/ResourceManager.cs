@@ -55,6 +55,8 @@ public class ResourceManager : MonoBehaviour
             maxCapacityPerResource
         );
 
+        Debug.Log($"{type.displayName}: {resources[type]}");
+
         return true;
     }
 }

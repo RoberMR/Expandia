@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8999773485004495903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1778170643490288986, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 127dfe374251a3b45901a530bdc7b4e8, type: 2}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.538
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376930817378984040, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420181658375914700, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: m_Name
+      value: Resource_FoodAndLeather
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133863173248390222, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: resourceType
+      value: 
+      objectReference: {fileID: 11400000, guid: 6740b4ea58b18e84396d5e1cb96f7e00, type: 2}
+    - target: {fileID: 9133863173248390222, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      propertyPath: intervalSeconds
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8420181658375914700, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6902016722329694266}
+  m_SourcePrefab: {fileID: 100100000, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+--- !u!1 &594440887500380371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8420181658375914700, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+  m_PrefabInstance: {fileID: 8999773485004495903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6902016722329694266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594440887500380371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85ce163930ae7440872acc2039b179e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType: {fileID: 11400000, guid: 32cb36082c02cb04dae473324ccd7264, type: 2}
+  intervalSeconds: 4
