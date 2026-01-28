@@ -59,4 +59,29 @@ public class ResourceManager : MonoBehaviour
 
         return true;
     }
+
+    public int AddClamped(ResourceType type, int amount)
+    {
+        if (!resources.ContainsKey(type))
+            resources[type] = 0;
+
+        int current = resources[type];
+        int maxAddable = maxCapacityPerResource - current;
+
+        if (maxAddable <= 0)
+            return 0;
+
+        int finalAmount = Mathf.Min(amount, maxAddable);
+        resources[type] += finalAmount;
+
+        OnResourceChanged?.Invoke(
+        type,
+        resources[type],
+        maxCapacityPerResource
+        );
+
+        Debug.Log($"{type.displayName}: {resources[type]} (added {finalAmount})");
+
+        return finalAmount;
+    }
 }
