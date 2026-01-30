@@ -14,6 +14,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] private GameObject detailPanel;
     [SerializeField] private Image detailIcon;
     [SerializeField] private TMP_Text detailName;
+    [SerializeField] private TMP_Text resourcesNeededText;
     [SerializeField] private Transform costsParent;
     [SerializeField] private CostEntryUI costEntryPrefab;
     [SerializeField] private Button craftButton;
@@ -35,14 +36,18 @@ public class CraftingUI : MonoBehaviour
         detailPanel.SetActive(true);
         detailIcon.sprite = recipe.icon;
         detailName.text = recipe.recipeName;
+        resourcesNeededText.text = "Resources needed:";
 
         foreach (Transform c in costsParent)
             Destroy(c.gameObject);
 
-        foreach (var cost in recipe.costs)
+        if (!CheckForCraftedBackpacks(recipe))
         {
-            var entry = Instantiate(costEntryPrefab, costsParent);
-            entry.Setup(cost);
+            foreach (var cost in recipe.costs)
+            {
+                var entry = Instantiate(costEntryPrefab, costsParent);
+                entry.Setup(cost);
+            }
         }
 
         craftButton.interactable = CraftingManager.Instance.CanCraft(recipe);
@@ -65,5 +70,18 @@ public class CraftingUI : MonoBehaviour
     {
         foreach (var btn in GetComponentsInChildren<RecipeButtonUI>())
             btn.buttonPressed = false;
+    }
+
+    private bool CheckForCraftedBackpacks(CraftingRecipe recipe)
+    {
+        if (recipe.recipeName == "Backpack Level 1" && PlayerInventoryUpgrades.Instance.HasBackpack(1) ||
+            recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2) ||
+            recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3))
+        {
+            craftButton.interactable = false;
+            resourcesNeededText.text = "You already possess this item";
+            return true;
+        }
+        return false;
     }
 }

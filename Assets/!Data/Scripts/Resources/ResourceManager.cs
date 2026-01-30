@@ -108,4 +108,20 @@ public class ResourceManager : MonoBehaviour
 
         return true;
     }
+
+    public void IncreaseMaxCapacity(int amount)
+    {
+        maxCapacityPerResource += amount;
+
+        foreach (var kvp in resources)
+        {
+            OnResourceChanged?.Invoke(
+                kvp.Key,
+                kvp.Value,
+                maxCapacityPerResource
+            );
+        }
+
+        OnUpdateCraftingUI?.Invoke();
+    }
 }
