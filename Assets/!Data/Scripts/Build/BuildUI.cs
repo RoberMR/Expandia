@@ -29,7 +29,7 @@ public class BuildUI : MonoBehaviour
             UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         bool canBuild = currentBuildPoint.CanBuild();
         buildButton.interactable = canBuild;

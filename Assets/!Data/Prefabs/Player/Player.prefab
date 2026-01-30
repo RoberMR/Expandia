@@ -257,7 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5834e42bb6f8a41990ba9ebd8b10a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
   moveSpeed: 5
 --- !u!114 &9002499363513235516
 MonoBehaviour:

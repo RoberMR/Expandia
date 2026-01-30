@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class BuildPoint : MonoBehaviour
@@ -16,12 +17,33 @@ public class BuildPoint : MonoBehaviour
     [SerializeField] private GameObject craftingTableObject;
     [SerializeField] private BuildUI buildUI;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI woodNeededText;
+    [SerializeField] private TextMeshProUGUI stoneNeededText;
+    [SerializeField] private TextMeshProUGUI ironNeededText;
+
     private bool isBuilt = false;
 
     private void Awake()
     {
         craftingTableObject.SetActive(false);
         buildUI.Hide();
+    }
+
+    private void Start()
+    {
+        ResourceManager.Instance.OnResourceChanged += OnResourceChanged;
+    }
+
+    private void OnDestroy()
+    {
+        if (ResourceManager.Instance != null)
+            ResourceManager.Instance.OnResourceChanged -= OnResourceChanged;
+    }
+
+    private void OnResourceChanged(ResourceType type, int current, int max)
+    {
+        UpdateUI();
     }
 
     public bool CanBuild()
@@ -39,9 +61,9 @@ public class BuildPoint : MonoBehaviour
         if (!CanBuild())
             return;
 
-        ResourceManager.Instance.Add(wood, -woodCost);
-        ResourceManager.Instance.Add(stone, -stoneCost);
-        ResourceManager.Instance.Add(iron, -ironCost);
+        ResourceManager.Instance.Remove(wood, woodCost);
+        ResourceManager.Instance.Remove(stone, stoneCost);
+        ResourceManager.Instance.Remove(iron, ironCost);
 
         isBuilt = true;
 
@@ -55,11 +77,20 @@ public class BuildPoint : MonoBehaviour
         if (isBuilt)
             return;
 
+        UpdateUI();
+
         buildUI.Show(this);
     }
 
     public void HideUI()
     {
         buildUI.Hide();
+    }
+
+    private void UpdateUI()
+    {
+        woodNeededText.text = ResourceManager.Instance.GetAmount(wood) + "/" + woodCost;
+        stoneNeededText.text = ResourceManager.Instance.GetAmount(stone) + "/" + stoneCost;
+        ironNeededText.text = ResourceManager.Instance.GetAmount(iron) + "/" + ironCost;
     }
 }

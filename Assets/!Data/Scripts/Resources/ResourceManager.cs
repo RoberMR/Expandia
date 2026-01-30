@@ -7,6 +7,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     public event Action<ResourceType, int, int> OnResourceChanged;
+    public event Action OnUpdateCraftingUI;
 
     [Header("Inventory")]
     [SerializeField] private int maxCapacityPerResource = 10;
@@ -55,7 +56,9 @@ public class ResourceManager : MonoBehaviour
             maxCapacityPerResource
         );
 
-        Debug.Log($"{type.displayName}: {resources[type]}");
+        OnUpdateCraftingUI?.Invoke();
+
+        //Debug.Log($"{type.displayName}: {resources[type]}");
 
         return true;
     }
@@ -80,8 +83,29 @@ public class ResourceManager : MonoBehaviour
         maxCapacityPerResource
         );
 
-        Debug.Log($"{type.displayName}: {resources[type]} (added {finalAmount})");
+        OnUpdateCraftingUI?.Invoke();
+
+        //Debug.Log($"{type.displayName}: {resources[type]} (added {finalAmount})");
 
         return finalAmount;
+    }
+
+    public bool Remove(ResourceType type, int amount)
+    {
+        if (!resources.ContainsKey(type))
+            return false;
+
+        if (resources[type] < amount)
+            return false;
+
+        resources[type] -= amount;
+
+        OnResourceChanged?.Invoke(
+            type,
+            resources[type],
+            maxCapacityPerResource
+        );
+
+        return true;
     }
 }
