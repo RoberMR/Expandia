@@ -1,11 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackpackSlotUI : MonoBehaviour
 {
-    [SerializeField] EquipmentSlotUI slot;
+    [Header("UI Reference")]
+    [SerializeField] private Image icon;
+
+    [Header("Sprites")]
+    [SerializeField] private Sprite inactiveSprite;
+    [SerializeField] private Sprite activeSprite;
 
     private void Start()
     {
+        if (icon == null)
+            icon = GetComponent<Image>();
+
         ResourceManager.Instance.OnResourceChanged += OnResourceChanged;
 
         Refresh();
@@ -24,8 +33,10 @@ public class BackpackSlotUI : MonoBehaviour
 
     public void Refresh()
     {
-        slot.SetActive(
-            PlayerInventoryUpgrades.Instance.backpackLevel > 0
-        );
+        if (icon == null)
+            return;
+
+        bool hasBackpack = PlayerInventoryUpgrades.Instance.backpackLevel > 0;
+        icon.sprite = hasBackpack ? activeSprite : inactiveSprite;
     }
 }

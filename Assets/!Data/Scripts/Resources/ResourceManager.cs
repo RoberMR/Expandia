@@ -93,12 +93,9 @@ public class ResourceManager : MonoBehaviour
     public bool Remove(ResourceType type, int amount)
     {
         if (!resources.ContainsKey(type))
-            return false;
+            resources[type] = 0;
 
-        if (resources[type] < amount)
-            return false;
-
-        resources[type] -= amount;
+        resources[type] = Mathf.Max(0, resources[type] - amount);
 
         OnResourceChanged?.Invoke(
             type,
@@ -106,8 +103,11 @@ public class ResourceManager : MonoBehaviour
             maxCapacityPerResource
         );
 
+        OnUpdateCraftingUI?.Invoke();
+
         return true;
     }
+
 
     public void IncreaseMaxCapacity(int amount)
     {

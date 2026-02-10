@@ -40,7 +40,6 @@ public class ResourceUIController : MonoBehaviour
 
     private int GetMaxCapacity()
     {
-        // Por ahora es global, más adelante vendrá de mochila/equipamiento
         return 10;
     }
 }

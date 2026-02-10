@@ -7,7 +7,9 @@ public class CraftingManager : MonoBehaviour
 
     public event Action OnBackpackCrafted;
 
-    ResourceManager inventory;
+    [SerializeField] private ToolStatsDatabase toolStatsDatabase;
+
+    private ResourceManager inventory;
 
     void Awake()
     {
@@ -23,11 +25,19 @@ public class CraftingManager : MonoBehaviour
         if (BackpackCanCraftCheck(recipe))
             return false;
 
+        if (recipe.IsTool())
+        {
+            ToolType toolType = recipe.GetToolType();
+            if (PlayerToolManager.Instance.HasTool(toolType))
+                return false;
+        }
+
         foreach (var cost in recipe.costs)
         {
             if (inventory.GetAmount(cost.type) < cost.amount)
                 return false;
         }
+
         return true;
     }
 
@@ -41,14 +51,25 @@ public class CraftingManager : MonoBehaviour
         foreach (var cost in recipe.costs)
             inventory.Remove(cost.type, cost.amount);
 
-        Debug.Log("Crafted: " + recipe.recipeName);
+        if (recipe.IsTool())
+        {
+            ToolStats stats = toolStatsDatabase.GetStats(recipe.toolMaterial);
+
+            PlayerToolManager.Instance.EquipTool(
+                recipe.GetToolType(),
+                recipe.toolMaterial,
+                stats.maxUses
+            );
+        }
+
+        //Debug.Log("Crafted: " + recipe.recipeName);
     }
 
     private bool BackpackCanCraftCheck(CraftingRecipe recipe)
     {
         return (recipe.recipeName == "Backpack Level 1" && PlayerInventoryUpgrades.Instance.HasBackpack(1)) ||
-            (recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2)) ||
-            (recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3));
+               (recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2)) ||
+               (recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3));
     }
 
     private void BackpackCraftChecks(CraftingRecipe recipe)

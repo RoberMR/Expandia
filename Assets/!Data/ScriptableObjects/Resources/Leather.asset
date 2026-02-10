@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4d47864aa48ea4f9acfc7f190c6264, type: 3}
   m_Name: Leather
   m_EditorClassIdentifier: 
-  resourceId: leather
+  resourceId: Leather
   displayName: Leather
   icon: {fileID: 21300000, guid: b8d777344c10a1546823e37197720781, type: 3}

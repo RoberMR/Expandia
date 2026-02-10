@@ -41,13 +41,16 @@ public class CraftingUI : MonoBehaviour
         foreach (Transform c in costsParent)
             Destroy(c.gameObject);
 
-        if (!CheckForCraftedBackpacks(recipe))
+        if (CheckForCraftedBackpacks(recipe))
+            return;
+
+        if (CheckForEquippedTool(recipe))
+            return;
+
+        foreach (var cost in recipe.costs)
         {
-            foreach (var cost in recipe.costs)
-            {
-                var entry = Instantiate(costEntryPrefab, costsParent);
-                entry.Setup(cost);
-            }
+            var entry = Instantiate(costEntryPrefab, costsParent);
+            entry.Setup(cost);
         }
 
         craftButton.interactable = CraftingManager.Instance.CanCraft(recipe);
@@ -74,14 +77,50 @@ public class CraftingUI : MonoBehaviour
 
     private bool CheckForCraftedBackpacks(CraftingRecipe recipe)
     {
-        if (recipe.recipeName == "Backpack Level 1" && PlayerInventoryUpgrades.Instance.HasBackpack(1) ||
-            recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2) ||
-            recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3))
+        if ((recipe.recipeName == "Backpack Level 1" && PlayerInventoryUpgrades.Instance.HasBackpack(1)) ||
+            (recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2)) ||
+            (recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3)))
         {
             craftButton.interactable = false;
             resourcesNeededText.text = "You already possess this item";
             return true;
         }
         return false;
+    }
+
+    private bool CheckForEquippedTool(CraftingRecipe recipe)
+    {
+        bool isTool = recipe.recipeType == RecipeType.Sword ||
+                      recipe.recipeType == RecipeType.Axe ||
+                      recipe.recipeType == RecipeType.Pickaxe;
+
+        if (!isTool)
+            return false;
+
+        ToolType type = GetToolTypeFromRecipe(recipe);
+
+        if (PlayerToolManager.Instance.HasTool(type))
+        {
+            craftButton.interactable = false;
+            resourcesNeededText.text = $"You already possess a {type.ToString().ToLower()}";
+
+            foreach (Transform c in costsParent)
+                Destroy(c.gameObject);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private ToolType GetToolTypeFromRecipe(CraftingRecipe recipe)
+    {
+        return recipe.recipeType switch
+        {
+            RecipeType.Sword => ToolType.Sword,
+            RecipeType.Axe => ToolType.Axe,
+            RecipeType.Pickaxe => ToolType.Pickaxe,
+            _ => throw new System.Exception("Recipe is not a tool")
+        };
     }
 }

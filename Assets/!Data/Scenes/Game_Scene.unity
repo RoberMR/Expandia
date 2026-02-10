@@ -222,7 +222,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquipmentSlot_Backpack
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -240,17 +241,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5159924316320549168, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
   m_PrefabInstance: {fileID: 6840118}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6840121 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
-  m_PrefabInstance: {fileID: 6840118}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6840120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652f48128eeda5c4ba4c747905bdd147, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6840122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45305c29faf06a545b7444fd9315c09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 6840121}
+  icon: {fileID: 339281813}
+  inactiveSprite: {fileID: 21300000, guid: 21dfc833884efb8438bd0c7cfb050c84, type: 3}
+  activeSprite: {fileID: 21300000, guid: cb5dd47888442864b9c86a0638b86b83, type: 3}
 --- !u!1 &24457781
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +694,14 @@ PrefabInstance:
       propertyPath: activeSprite
       value: 
       objectReference: {fileID: 21300000, guid: 6687c068d74a5274db7d2956b511aace, type: 3}
+    - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+      propertyPath: iconDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 35822b3fe54243945ab64a13b3c2fca0, type: 2}
+    - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+      propertyPath: slotToolType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
       propertyPath: inactiveSprite
       value: 
@@ -1817,6 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744ec94d6bdfb4e4ab5ca4eaf0b22bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolStatsDatabase: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
 --- !u!4 &184901030
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,6 +2862,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &339281813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 406085725278348542, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+  m_PrefabInstance: {fileID: 6840118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &388082080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,6 +3771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1534824066716911735, guid: 0125acaa1e45c1443befb4d7281ab937, type: 3}
+      propertyPath: toolStatsDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
     - target: {fileID: 2257628229376301301, guid: 0125acaa1e45c1443befb4d7281ab937, type: 3}
       propertyPath: m_Name
       value: Resource_Iron
@@ -4063,6 +4079,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2449216301788357307, guid: 740c7c40ac6d1194fa949fc5d2323c53, type: 3}
+      propertyPath: toolStatsDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
     - target: {fileID: 3162973403431793209, guid: 740c7c40ac6d1194fa949fc5d2323c53, type: 3}
       propertyPath: m_Name
       value: Resource_Wood
@@ -6403,6 +6423,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 99c8454bbaaac1c44bb75218d3a00fc7, type: 3}
     - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+      propertyPath: iconDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 35822b3fe54243945ab64a13b3c2fca0, type: 2}
+    - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+      propertyPath: slotToolType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
       propertyPath: inactiveSprite
       value: 
       objectReference: {fileID: 21300000, guid: 888b4da27269ec047ab4539d2175d733, type: 3}
@@ -7015,6 +7043,7 @@ MonoBehaviour:
   food: {fileID: 11400000, guid: 6740b4ea58b18e84396d5e1cb96f7e00, type: 2}
   leather: {fileID: 11400000, guid: 32cb36082c02cb04dae473324ccd7264, type: 2}
   debugAddAmount: 100
+  debugRemoveAmount: 100
 --- !u!4 &1280365718
 Transform:
   m_ObjectHideFlags: 0
@@ -8907,6 +8936,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backpackLevel: 0
+--- !u!114 &1835389432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835389416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5ca52b73832a84f9a9811e3210de62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1845596906
 GameObject:
   m_ObjectHideFlags: 0
@@ -9700,6 +9741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Stone
       objectReference: {fileID: 0}
+    - target: {fileID: 7613056508904677640, guid: 95d6799985bd3ff4a852d045f5e49caf, type: 3}
+      propertyPath: toolStatsDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
     - target: {fileID: 8143948318725281070, guid: 95d6799985bd3ff4a852d045f5e49caf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.2399995
@@ -9998,6 +10043,10 @@ PrefabInstance:
       propertyPath: activeSprite
       value: 
       objectReference: {fileID: 21300000, guid: 22b612a3144f0c54f9df7ff91d2cc66f, type: 3}
+    - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
+      propertyPath: iconDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 35822b3fe54243945ab64a13b3c2fca0, type: 2}
     - target: {fileID: 1493338219967131630, guid: 76e5aaec4ac2ec94eae9962abff679df, type: 3}
       propertyPath: inactiveSprite
       value: 
@@ -10938,6 +10987,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7691096475866608644, guid: 7b9c78888777134448dc9b219a158d77, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1835389424}
+    - targetCorrespondingSourceObject: {fileID: 7691096475866608644, guid: 7b9c78888777134448dc9b219a158d77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1835389432}
   m_SourcePrefab: {fileID: 100100000, guid: 7b9c78888777134448dc9b219a158d77, type: 3}
 --- !u!1001 &7059079267292489319
 PrefabInstance:
@@ -10947,6 +10999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 155266868474677329, guid: e4808849545abb648858552e4aad895b, type: 3}
+      propertyPath: toolStatsDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
     - target: {fileID: 594440887500380371, guid: e4808849545abb648858552e4aad895b, type: 3}
       propertyPath: m_Name
       value: Resource_FoodAndLeather
@@ -10991,6 +11047,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6902016722329694266, guid: e4808849545abb648858552e4aad895b, type: 3}
+      propertyPath: toolStatsDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11156,20 +11216,20 @@ SceneRoots:
   - {fileID: 1845596907}
   - {fileID: 24457783}
   - {fileID: 424284570}
-  - {fileID: 1600730836}
-  - {fileID: 338315748}
-  - {fileID: 2138257436}
-  - {fileID: 409684090}
   - {fileID: 486757357}
   - {fileID: 86323916}
   - {fileID: 417890757}
-  - {fileID: 1516323186}
-  - {fileID: 4868969948721101740}
-  - {fileID: 6725658340732226217}
   - {fileID: 1951792862}
   - {fileID: 264624862}
   - {fileID: 184901030}
   - {fileID: 1280365718}
+  - {fileID: 1516323186}
+  - {fileID: 4868969948721101740}
+  - {fileID: 6725658340732226217}
+  - {fileID: 1600730836}
+  - {fileID: 338315748}
+  - {fileID: 2138257436}
+  - {fileID: 409684090}
   - {fileID: 1502504596}
   - {fileID: 1276187797}
   - {fileID: 540178413}

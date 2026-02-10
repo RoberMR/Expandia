@@ -11,6 +11,7 @@ public class DebugResourceCheats : MonoBehaviour
 
     [Header("Debug Values")]
     [SerializeField] private int debugAddAmount = 100;
+    [SerializeField] private int debugRemoveAmount = 100;
 
     private void Update()
     {
@@ -28,6 +29,23 @@ public class DebugResourceCheats : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
             AddDebug(leather);
+
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            RemoveDebug(wood);
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+            RemoveDebug(stone);
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            RemoveDebug(iron);
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            RemoveDebug(food);
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+            RemoveDebug(leather);
     }
 
     private void AddDebug(ResourceType type)
@@ -36,5 +54,13 @@ public class DebugResourceCheats : MonoBehaviour
             return;
 
         ResourceManager.Instance.AddClamped(type, debugAddAmount);
+    }
+
+    private void RemoveDebug(ResourceType type)
+    {
+        if (type == null)
+            return;
+
+        ResourceManager.Instance.Remove(type, debugRemoveAmount);
     }
 }

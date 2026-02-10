@@ -21,3 +21,4 @@ MonoBehaviour:
     amount: 7
   recipeType: 2
   level: 2
+  toolMaterial: 1
