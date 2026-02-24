@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class ResourceNode : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ResourceNode : MonoBehaviour
 
     [Header("Tools")]
     [SerializeField] private ToolStatsDatabase toolStatsDatabase;
+
+    [Header("UI")]
+    [SerializeField] private GameObject foodLeatherWarningText;
 
     private Coroutine harvestCoroutine;
 
@@ -20,6 +24,8 @@ public class ResourceNode : MonoBehaviour
 
     public void StopHarvesting()
     {
+        ActivateDeactivateFoodLeatherWarningText(false);
+
         if (harvestCoroutine != null)
         {
             StopCoroutine(harvestCoroutine);
@@ -34,8 +40,15 @@ public class ResourceNode : MonoBehaviour
             float waitTime = intervalSeconds;
 
             ToolType requiredTool = GetRequiredTool();
-
             var tool = PlayerToolManager.Instance.GetTool(requiredTool);
+
+            if (requiredTool == ToolType.Sword && tool == null)
+            {
+                ActivateDeactivateFoodLeatherWarningText(true);
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
             if (tool != null)
             {
                 ToolStats stats = toolStatsDatabase.GetStats(tool.material);
@@ -50,14 +63,7 @@ public class ResourceNode : MonoBehaviour
             ResourceManager.Instance.Add(resourceType, 1);
 
             if (tool != null)
-            {
-                tool.remainingUses--;
-
-                if (tool.remainingUses <= 0)
-                {
-                    PlayerToolManager.Instance.BreakTool(requiredTool);
-                }
-            }
+                PlayerToolManager.Instance.ConsumeUse(requiredTool);
         }
     }
 
@@ -76,5 +82,11 @@ public class ResourceNode : MonoBehaviour
             default:
                 return ToolType.Axe;
         }
+    }
+
+    private void ActivateDeactivateFoodLeatherWarningText(bool activate)
+    {
+        if (foodLeatherWarningText != null)
+            foodLeatherWarningText.SetActive(activate);
     }
 }

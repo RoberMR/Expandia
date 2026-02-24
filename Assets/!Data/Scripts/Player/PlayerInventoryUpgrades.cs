@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerInventoryUpgrades : MonoBehaviour
 {
     public static PlayerInventoryUpgrades Instance { get; private set; }
+
+    public event Action OnBackpackLevelChanged;
 
     [Header("Backpack")]
     public int backpackLevel = 0;
@@ -28,5 +31,7 @@ public class PlayerInventoryUpgrades : MonoBehaviour
             return;
 
         backpackLevel = level;
+
+        OnBackpackLevelChanged?.Invoke();
     }
 }

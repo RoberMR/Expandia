@@ -10,6 +10,7 @@ public class PlayerToolManager : MonoBehaviour
         new Dictionary<ToolType, EquippedTool>();
 
     public event Action<ToolType, EquippedTool> OnToolChanged;
+    public event Action<ToolType, EquippedTool> OnToolUpdated;
 
     private void Awake()
     {
@@ -33,7 +34,8 @@ public class PlayerToolManager : MonoBehaviour
         {
             type = type,
             material = material,
-            remainingUses = uses
+            remainingUses = uses,
+            maxUses = uses
         };
 
         OnToolChanged?.Invoke(type, equippedTools[type]);
@@ -43,6 +45,22 @@ public class PlayerToolManager : MonoBehaviour
     {
         equippedTools.Remove(type);
         OnToolChanged?.Invoke(type, null);
+    }
+
+    public void ConsumeUse(ToolType type)
+    {
+        if (!equippedTools.ContainsKey(type))
+            return;
+
+        var tool = equippedTools[type];
+        tool.remainingUses--;
+
+        OnToolUpdated?.Invoke(type, tool);
+
+        if (tool.remainingUses <= 0)
+        {
+            BreakTool(type);
+        }
     }
 }
 
@@ -54,6 +72,7 @@ public class EquippedTool
     public ToolType type;
     public ToolMaterial material;
     public int remainingUses;
+    public int maxUses;
 }
 
 // -------------------------------------------------- //

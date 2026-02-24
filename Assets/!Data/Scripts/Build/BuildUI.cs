@@ -6,7 +6,6 @@ public class BuildUI : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private Button buildButton;
-    //[SerializeField] private TextMeshProUGUI requirementsText;
 
     private BuildPoint currentBuildPoint;
 

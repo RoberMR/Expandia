@@ -91,3 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: {fileID: 11400000, guid: 32cb36082c02cb04dae473324ccd7264, type: 2}
   intervalSeconds: 4
+  toolStatsDatabase: {fileID: 0}
+  foodLeatherWarningText: {fileID: 606071558747008624}
+--- !u!1 &606071558747008624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8398277149801919087, guid: 26601abd02f4d794f963e462bed21d0a, type: 3}
+  m_PrefabInstance: {fileID: 8999773485004495903}
+  m_PrefabAsset: {fileID: 0}
