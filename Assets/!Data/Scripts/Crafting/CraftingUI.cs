@@ -19,6 +19,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] private CostEntryUI costEntryPrefab;
     [SerializeField] private Button craftButton;
 
+    [Header("Recipe")]
     private CraftingRecipe currentRecipe;
 
     private void Start()
@@ -42,6 +43,9 @@ public class CraftingUI : MonoBehaviour
             Destroy(c.gameObject);
 
         if (CheckForCraftedBackpacks(recipe))
+            return;
+
+        if (CheckForCraftedStorage(recipe))
             return;
 
         if (CheckForEquippedTool(recipe))
@@ -85,6 +89,24 @@ public class CraftingUI : MonoBehaviour
             resourcesNeededText.text = "You already possess this item";
             return true;
         }
+        return false;
+    }
+
+    private bool CheckForCraftedStorage(CraftingRecipe recipe)
+    {
+        if ((recipe.recipeName == "Storage Level 1" && PlayerStorageUpgrades.Instance.HasStorage(1)) ||
+            (recipe.recipeName == "Storage Level 2" && PlayerStorageUpgrades.Instance.HasStorage(2)) ||
+            (recipe.recipeName == "Storage Level 3" && PlayerStorageUpgrades.Instance.HasStorage(3)))
+        {
+            craftButton.interactable = false;
+            resourcesNeededText.text = "You already possess this item";
+
+            foreach (Transform c in costsParent)
+                Destroy(c.gameObject);
+
+            return true;
+        }
+
         return false;
     }
 

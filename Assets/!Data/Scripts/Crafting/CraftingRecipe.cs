@@ -5,11 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Crafting/Recipe")]
 public class CraftingRecipe : ScriptableObject
 {
+    [Header("Crafting Recipe UI Elements")]
     public string recipeName;
     public Sprite icon;
-
     public List<ResourceCost> costs;
-
     public RecipeType recipeType;
     public int level;
 

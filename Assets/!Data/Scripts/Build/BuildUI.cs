@@ -7,6 +7,7 @@ public class BuildUI : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Button buildButton;
 
+    [Header("Build point")]
     private BuildPoint currentBuildPoint;
 
     public void Show(BuildPoint buildPoint)

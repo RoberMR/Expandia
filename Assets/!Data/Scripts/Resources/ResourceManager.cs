@@ -124,4 +124,11 @@ public class ResourceManager : MonoBehaviour
 
         OnUpdateCraftingUI?.Invoke();
     }
+
+    public int GetTotalAmount(ResourceType type)
+    {
+        int inInventory = GetAmount(type);
+        int inStorage = StorageManager.Instance != null ? StorageManager.Instance.GetStored(type) : 0;
+        return inInventory + inStorage;
+    }
 }

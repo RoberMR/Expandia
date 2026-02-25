@@ -3,7 +3,7 @@ using UnityEngine;
 public class CraftingTableInteractor : MonoBehaviour
 {
     [Header("Crafting Canvas")]
-    [SerializeField] GameObject craftingCanvas;
+    [SerializeField] private GameObject craftingCanvas;
 
     private void OnTriggerEnter(Collider other)
     {

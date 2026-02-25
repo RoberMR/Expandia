@@ -6,9 +6,12 @@ public class CraftingManager : MonoBehaviour
     public static CraftingManager Instance { get; private set; }
 
     public event Action OnBackpackCrafted;
+    public event Action OnStorageCrafted;
 
+    [Header("ToolStatsDatabase")]
     [SerializeField] private ToolStatsDatabase toolStatsDatabase;
 
+    [Header("Inventory reference")]
     private ResourceManager inventory;
 
     void Awake()
@@ -24,6 +27,8 @@ public class CraftingManager : MonoBehaviour
 
         if (BackpackCanCraftCheck(recipe))
             return false;
+        if (StorageCanCraftCheck(recipe))
+            return false;
 
         if (recipe.IsTool())
         {
@@ -34,7 +39,7 @@ public class CraftingManager : MonoBehaviour
 
         foreach (var cost in recipe.costs)
         {
-            if (inventory.GetAmount(cost.type) < cost.amount)
+            if (ResourceManager.Instance.GetTotalAmount(cost.type) < cost.amount)
                 return false;
         }
 
@@ -47,6 +52,7 @@ public class CraftingManager : MonoBehaviour
             return;
 
         BackpackCraftChecks(recipe);
+        StorageCraftChecks(recipe);
 
         foreach (var cost in recipe.costs)
             inventory.Remove(cost.type, cost.amount);
@@ -72,6 +78,13 @@ public class CraftingManager : MonoBehaviour
                (recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3));
     }
 
+    private bool StorageCanCraftCheck(CraftingRecipe recipe)
+    {
+        return (recipe.recipeName == "Storage Level 1" && PlayerStorageUpgrades.Instance.HasStorage(1)) ||
+               (recipe.recipeName == "Storage Level 2" && PlayerStorageUpgrades.Instance.HasStorage(2)) ||
+               (recipe.recipeName == "Storage Level 3" && PlayerStorageUpgrades.Instance.HasStorage(3));
+    }
+
     private void BackpackCraftChecks(CraftingRecipe recipe)
     {
         if (recipe.recipeName == "Backpack Level 1")
@@ -91,5 +104,20 @@ public class CraftingManager : MonoBehaviour
         }
 
         OnBackpackCrafted?.Invoke();
+    }
+
+    private void StorageCraftChecks(CraftingRecipe recipe)
+    {
+        int newLevel = 0;
+
+        if (recipe.recipeName == "Storage Level 1") newLevel = 1;
+        else if (recipe.recipeName == "Storage Level 2") newLevel = 2;
+        else if (recipe.recipeName == "Storage Level 3") newLevel = 3;
+
+        if (newLevel > 0)
+        {
+            StorageManager.Instance.SetLevel(newLevel);
+            OnStorageCrafted?.Invoke();
+        }
     }
 }

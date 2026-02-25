@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class RecipeButtonUI : MonoBehaviour
 {
-    [SerializeField] CraftingRecipe recipe;
-    CraftingUI craftingUI;
+    [Header("Crafting")]
+    [SerializeField] private CraftingRecipe recipe;
+    private CraftingUI craftingUI;
 
+    [Header("Button state")]
     public bool buttonPressed;
 
     private void Start()

@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: {fileID: 11400000, guid: 32cb36082c02cb04dae473324ccd7264, type: 2}
   intervalSeconds: 4
-  toolStatsDatabase: {fileID: 0}
+  toolStatsDatabase: {fileID: 11400000, guid: 8a918a4fad157d54984e1b2f55a59471, type: 2}
   foodLeatherWarningText: {fileID: 606071558747008624}
 --- !u!1 &606071558747008624 stripped
 GameObject:

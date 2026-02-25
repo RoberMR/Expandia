@@ -4,12 +4,15 @@ using TMPro;
 
 public class CostEntryUI : MonoBehaviour
 {
+    [Header("Cost Entry UI Elements")]
     [SerializeField] Image icon;
     [SerializeField] TMP_Text amount;
 
     public void Setup(ResourceCost cost)
     {
         icon.sprite = cost.type.icon;
-        amount.text = ResourceManager.Instance.GetAmount(cost.type) + "/" + cost.amount.ToString();
+
+        int total = ResourceManager.Instance.GetTotalAmount(cost.type);
+        amount.text = $"{total}/{cost.amount}";
     }
 }

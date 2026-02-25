@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class EquipmentSlotUI : MonoBehaviour
 {
+    [Header("Icon Related Elements")]
     [SerializeField] private ToolType slotToolType;
     [SerializeField] private Image icon;
     [SerializeField] private Sprite inactiveSprite;
