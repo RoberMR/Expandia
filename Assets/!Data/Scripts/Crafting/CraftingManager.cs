@@ -55,7 +55,21 @@ public class CraftingManager : MonoBehaviour
         StorageCraftChecks(recipe);
 
         foreach (var cost in recipe.costs)
-            inventory.Remove(cost.type, cost.amount);
+        {
+            int remainingCost = cost.amount;
+
+            int inventoryAmount = ResourceManager.Instance.GetAmount(cost.type);
+            int removeFromInventory = Mathf.Min(inventoryAmount, remainingCost);
+
+            if (removeFromInventory > 0)
+            {
+                ResourceManager.Instance.Remove(cost.type, removeFromInventory);
+                remainingCost -= removeFromInventory;
+            }
+
+            if (remainingCost > 0 && StorageManager.Instance != null)
+                StorageManager.Instance.Remove(cost.type, remainingCost);
+        }
 
         if (recipe.IsTool())
         {
