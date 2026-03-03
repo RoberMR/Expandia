@@ -14,6 +14,7 @@ public class ResourceManager : MonoBehaviour
 
     [Header("Resources Dictionary")]
     private Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
+    [SerializeField] private List<ResourceType> allResourceTypesExceptGold;
 
     private void Awake()
     {
@@ -131,5 +132,10 @@ public class ResourceManager : MonoBehaviour
         int inInventory = GetAmount(type);
         int inStorage = StorageManager.Instance != null ? StorageManager.Instance.GetStored(type) : 0;
         return inInventory + inStorage;
+    }
+
+    public List<ResourceType> GetAllResourceTypes()
+    {
+        return allResourceTypesExceptGold;
     }
 }
