@@ -8,6 +8,7 @@ public class DebugResourceCheats : MonoBehaviour
     [SerializeField] private ResourceType iron;
     [SerializeField] private ResourceType food;
     [SerializeField] private ResourceType leather;
+    [SerializeField] private ResourceType gold;
 
     [Header("Debug Values")]
     [SerializeField] private int debugAddAmount = 100;
@@ -30,6 +31,8 @@ public class DebugResourceCheats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5))
             AddDebug(leather);
 
+        if (Input.GetKeyDown(KeyCode.G))
+            AddDebug(gold);
 
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -46,6 +49,9 @@ public class DebugResourceCheats : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
             RemoveDebug(leather);
+
+        if (Input.GetKeyDown(KeyCode.H))
+            RemoveDebug(gold);
     }
 
     private void AddDebug(ResourceType type)

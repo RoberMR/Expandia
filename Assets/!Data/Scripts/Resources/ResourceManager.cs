@@ -36,6 +36,9 @@ public class ResourceManager : MonoBehaviour
 
     public bool CanAdd(ResourceType type, int amount)
     {
+        if (type.isUnlimited)
+            return true;
+
         int current = GetAmount(type);
         return current + amount <= maxCapacityPerResource;
     }
@@ -68,6 +71,15 @@ public class ResourceManager : MonoBehaviour
         if (!resources.ContainsKey(type))
             resources[type] = 0;
 
+        if (type.isUnlimited)
+        {
+            resources[type] += amount;
+
+            OnResourceChanged?.Invoke(type, resources[type], -1);
+            OnUpdateCraftingUI?.Invoke();
+            return amount;
+        }
+
         int current = resources[type];
         int maxAddable = maxCapacityPerResource - current;
 
@@ -77,15 +89,8 @@ public class ResourceManager : MonoBehaviour
         int finalAmount = Mathf.Min(amount, maxAddable);
         resources[type] += finalAmount;
 
-        OnResourceChanged?.Invoke(
-        type,
-        resources[type],
-        maxCapacityPerResource
-        );
-
+        OnResourceChanged?.Invoke(type, resources[type], maxCapacityPerResource);
         OnUpdateCraftingUI?.Invoke();
-
-        //Debug.Log($"{type.displayName}: {resources[type]} (added {finalAmount})");
 
         return finalAmount;
     }
@@ -97,17 +102,13 @@ public class ResourceManager : MonoBehaviour
 
         resources[type] = Mathf.Max(0, resources[type] - amount);
 
-        OnResourceChanged?.Invoke(
-            type,
-            resources[type],
-            maxCapacityPerResource
-        );
+        int max = type.isUnlimited ? -1 : maxCapacityPerResource;
 
+        OnResourceChanged?.Invoke(type, resources[type], max);
         OnUpdateCraftingUI?.Invoke();
 
         return true;
     }
-
 
     public void IncreaseMaxCapacity(int amount)
     {

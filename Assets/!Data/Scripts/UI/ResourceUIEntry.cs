@@ -19,7 +19,10 @@ public class ResourceUIEntry : MonoBehaviour
 
     public void UpdateAmount(int current, int max)
     {
-        amountText.text = $"{current} / {max}";
+        if (resourceType.isUnlimited)
+            amountText.text = $"{current}";
+        else
+            amountText.text = $"{current} / {max}";
     }
 
     public ResourceType GetResourceType()
