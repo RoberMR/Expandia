@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 
-public class CraftingUI : MonoBehaviour
+public class ConstructionUI : MonoBehaviour
 {
     [Header("Grid")]
     [SerializeField] private Transform recipesGrid;
@@ -17,7 +17,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] private TMP_Text resourcesNeededText;
     [SerializeField] private Transform costsParent;
     [SerializeField] private CostEntryUI costEntryPrefab;
-    [SerializeField] private Button craftButton;
+    [SerializeField] private Button buildButton;
 
     [Header("Recipe")]
     private CraftingRecipe currentRecipe;
@@ -26,7 +26,7 @@ public class CraftingUI : MonoBehaviour
     {
         detailPanel.SetActive(false);
 
-        foreach (var btn in GetComponentsInChildren<RecipeButtonUI>())
+        foreach (var btn in GetComponentsInChildren<ConstructionRecipeButtonUI>())
             btn.Setup(this);
     }
 
@@ -57,13 +57,13 @@ public class CraftingUI : MonoBehaviour
             entry.Setup(cost);
         }
 
-        craftButton.interactable = CraftingManager.Instance.CanCraft(recipe);
+        buildButton.interactable = CraftingManager.Instance.CanCraft(recipe);
     }
 
-    public void Craft()
+    public void Build()
     {
         CraftingManager.Instance.Craft(currentRecipe);
-        craftButton.interactable = false;
+        buildButton.interactable = false;
         Back();
     }
 
@@ -85,7 +85,7 @@ public class CraftingUI : MonoBehaviour
             (recipe.recipeName == "Backpack Level 2" && PlayerInventoryUpgrades.Instance.HasBackpack(2)) ||
             (recipe.recipeName == "Backpack Level 3" && PlayerInventoryUpgrades.Instance.HasBackpack(3)))
         {
-            craftButton.interactable = false;
+            buildButton.interactable = false;
             resourcesNeededText.text = "You already possess this item";
             return true;
         }
@@ -98,7 +98,7 @@ public class CraftingUI : MonoBehaviour
             (recipe.recipeName == "Storage Level 2" && PlayerStorageUpgrades.Instance.HasStorage(2)) ||
             (recipe.recipeName == "Storage Level 3" && PlayerStorageUpgrades.Instance.HasStorage(3)))
         {
-            craftButton.interactable = false;
+            buildButton.interactable = false;
             resourcesNeededText.text = "You already possess this item";
 
             foreach (Transform c in costsParent)
@@ -123,7 +123,7 @@ public class CraftingUI : MonoBehaviour
 
         if (PlayerToolManager.Instance.HasTool(type))
         {
-            craftButton.interactable = false;
+            buildButton.interactable = false;
             resourcesNeededText.text = $"You already possess a {type.ToString().ToLower()}";
 
             foreach (Transform c in costsParent)

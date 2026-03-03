@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildUI : MonoBehaviour
+public class ConstructionZoneBuildUI : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private Button buildButton;
 
     [Header("Build point")]
-    private BuildPoint currentBuildPoint;
+    private ConstructionZoneBuildPoint currentBuildPoint;
 
-    public void Show(BuildPoint buildPoint)
+    public void Show(ConstructionZoneBuildPoint buildPoint)
     {
         currentBuildPoint = buildPoint;
         gameObject.SetActive(true);

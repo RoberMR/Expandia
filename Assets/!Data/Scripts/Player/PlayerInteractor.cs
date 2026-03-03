@@ -8,6 +8,10 @@ public class PlayerInteractor : MonoBehaviour
         if (buildPoint != null)
             buildPoint.ShowUI();
 
+        ConstructionZoneBuildPoint constructionZoneBuildPoint = other.GetComponentInParent<ConstructionZoneBuildPoint>();
+        if (constructionZoneBuildPoint != null)
+            constructionZoneBuildPoint.ShowUI();
+
         ResourceNode[] nodes = other.GetComponents<ResourceNode>();
         if (nodes.Length == 0) return;
 
@@ -20,6 +24,10 @@ public class PlayerInteractor : MonoBehaviour
         BuildPoint buildPoint = other.GetComponentInParent<BuildPoint>();
         if (buildPoint != null)
             buildPoint.HideUI();
+
+        ConstructionZoneBuildPoint constructionZoneBuildPoint = other.GetComponentInParent<ConstructionZoneBuildPoint>();
+        if (constructionZoneBuildPoint != null)
+            constructionZoneBuildPoint.HideUI();
 
         ResourceNode[] nodes = other.GetComponents<ResourceNode>();
         if (nodes.Length == 0) return;
