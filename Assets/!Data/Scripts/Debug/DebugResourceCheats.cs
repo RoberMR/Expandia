@@ -34,6 +34,16 @@ public class DebugResourceCheats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
             AddDebug(gold);
 
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            AddDebug(wood);
+            AddDebug(stone);
+            AddDebug(iron);
+            AddDebug(food);
+            AddDebug(leather);
+            AddDebug(gold);
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
             RemoveDebug(wood);
@@ -52,6 +62,16 @@ public class DebugResourceCheats : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
             RemoveDebug(gold);
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            RemoveDebug(wood);
+            RemoveDebug(stone);
+            RemoveDebug(iron);
+            RemoveDebug(food);
+            RemoveDebug(leather);
+            RemoveDebug(gold);
+        }
     }
 
     private void AddDebug(ResourceType type)

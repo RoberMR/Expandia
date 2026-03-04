@@ -9,4 +9,5 @@ public class ResourceType : ScriptableObject
 
     [Header("Behaviour")]
     public bool isUnlimited;
+    public bool isVillager;
 }

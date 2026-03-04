@@ -47,5 +47,12 @@ public enum RecipeType
     Axe,
     Pickaxe,
     Backpack,
-    Storage
+    Storage,
+    MyHouse,
+    VillagersHouse,
+    Sawmill,
+    Quarry,
+    Mine,
+    Farm,
+    Market
 }
