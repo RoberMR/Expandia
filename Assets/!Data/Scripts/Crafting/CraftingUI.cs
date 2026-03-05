@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.iOS;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CraftingUI : MonoBehaviour
@@ -14,6 +15,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] private GameObject detailPanel;
     [SerializeField] private Image detailIcon;
     [SerializeField] private TMP_Text detailName;
+    [SerializeField] private TMP_Text infoText;
     [SerializeField] private TMP_Text resourcesNeededText;
     [SerializeField] private Transform costsParent;
     [SerializeField] private CostEntryUI costEntryPrefab;
@@ -37,6 +39,7 @@ public class CraftingUI : MonoBehaviour
         detailPanel.SetActive(true);
         detailIcon.sprite = recipe.icon;
         detailName.text = recipe.recipeName;
+        ReturnInfoText(recipe);
         resourcesNeededText.text = "Resources needed:";
 
         foreach (Transform c in costsParent)
@@ -144,5 +147,50 @@ public class CraftingUI : MonoBehaviour
             RecipeType.Pickaxe => ToolType.Pickaxe,
             _ => throw new System.Exception("Recipe is not a tool")
         };
+    }
+
+    private void ReturnInfoText(CraftingRecipe recipe)
+    {
+        infoText.text = "";
+
+        if (recipe.recipeType == RecipeType.Backpack)
+        {
+            infoText.text = "Allows you to carry ";
+
+            if (recipe.level == 1)
+                infoText.text += "25 of each resource in your inventory.";
+            else if (recipe.level == 2)
+                infoText.text += "50 of each resource in your inventory.";
+            else if (recipe.level == 3)
+                infoText.text += "100 of each resource in your inventory.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Storage)
+        {
+            if (recipe.level == 1)
+                infoText.text += "Creates a Storage where you can store 150 of each resource.";
+            else if (recipe.level == 2)
+                infoText.text += "Allows you to store 300 of each resource in the Storage.";
+            else if (recipe.level == 3)
+                infoText.text += "Allows you to store 500 of each resource in the Storage.";
+
+            return;
+        }
+
+        if (recipe.recipeType == RecipeType.Sword)
+            infoText.text = "Collects Food and Leather ";
+        else if (recipe.recipeType == RecipeType.Axe)
+            infoText.text = "Collects Wood ";
+        else if (recipe.recipeType == RecipeType.Pickaxe)
+            infoText.text = "Collects Stone and Iron ";
+
+        if (recipe.toolMaterial == ToolMaterial.Wood)
+            infoText.text += "20% faster.";
+        else if (recipe.toolMaterial == ToolMaterial.Stone)
+            infoText.text += "50% faster.";
+        else if (recipe.toolMaterial == ToolMaterial.Iron)
+            infoText.text += "80% faster.";
     }
 }

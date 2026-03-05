@@ -99,9 +99,9 @@ public class EquipmentSlotUI : MonoBehaviour
         if (material == ToolMaterial.Wood)
             descriptionText += "20% faster.";
         else if (material == ToolMaterial.Stone)
-            descriptionText += "40% faster.";
+            descriptionText += "50% faster.";
         else if (material == ToolMaterial.Iron)
-            descriptionText += "60% faster.";
+            descriptionText += "80% faster.";
 
         return descriptionText;
     }

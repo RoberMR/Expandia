@@ -18,7 +18,7 @@ MonoBehaviour:
     gatherSpeedMultiplier: 0.8
   - material: 1
     maxUses: 75
-    gatherSpeedMultiplier: 0.6
+    gatherSpeedMultiplier: 0.5
   - material: 2
     maxUses: 150
-    gatherSpeedMultiplier: 0.25
+    gatherSpeedMultiplier: 0.2

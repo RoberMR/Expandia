@@ -14,6 +14,7 @@ public class ConstructionUI : MonoBehaviour
     [SerializeField] private GameObject detailPanel;
     [SerializeField] private Image detailIcon;
     [SerializeField] private TMP_Text detailName;
+    [SerializeField] private TMP_Text infoText;
     [SerializeField] private TMP_Text resourcesNeededText;
     [SerializeField] private Transform costsParent;
     [SerializeField] private CostEntryUI costEntryPrefab;
@@ -37,6 +38,7 @@ public class ConstructionUI : MonoBehaviour
         detailPanel.SetActive(true);
         detailIcon.sprite = recipe.icon;
         detailName.text = recipe.recipeName;
+        ReturnInfoText(recipe);
         resourcesNeededText.text = "Resources needed:";
 
         foreach (Transform c in costsParent)
@@ -144,5 +146,102 @@ public class ConstructionUI : MonoBehaviour
             RecipeType.Pickaxe => ToolType.Pickaxe,
             _ => throw new System.Exception("Recipe is not a tool")
         };
+    }
+
+    private void ReturnInfoText(CraftingRecipe recipe)
+    {
+        infoText.text = "";
+
+        if (recipe.recipeType == RecipeType.Storage)
+        {
+            if (recipe.level == 4)
+                infoText.text += "Allows you to store 1000 of each resource in the Storage.";
+            else if (recipe.level == 5)
+                infoText.text += "Allows you to store 2500 of each resource in the Storage.";
+            else if (recipe.level == 6)
+                infoText.text += "Allows you to store 5000 of each resource in the Storage.";
+            else if (recipe.level == 7)
+                infoText.text += "Allows you to store 10000 of each resource in the Storage.";
+            else if (recipe.level == 8)
+                infoText.text += "Allows you to store 25000 of each resource in the Storage.";
+            else if (recipe.level == 9)
+                infoText.text += "Allows you to store 50000 of each resource in the Storage.";
+            else if (recipe.level == 10)
+                infoText.text += "Allows you to store 100000 of each resource in the Storage.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.MyHouse)
+        {
+            if (recipe.level == 1)
+                infoText.text += "Builds your house, which allows you to collect gold from your villagers, when you have them.";
+            else if (recipe.level == 2)
+                infoText.text += "You double all the gold collected from your villagers.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.VillagersHouse)
+        {
+            if (recipe.level == 1)
+                infoText.text += "Builds the villagers' house. It has 10 villagers, who will produce 100 gold per hour, if you have your own house.";
+            else if (recipe.level == 2)
+                infoText.text += "Increases the total number of villagers to 20, who will produce 200 gold per hour.";
+            else if (recipe.level == 3)
+                infoText.text += "Increases the total number of villagers to 30, who will produce 300 gold per hour.";
+            else if (recipe.level == 4)
+                infoText.text += "Increases the total number of villagers to 40, who will produce 400 gold per hour.";
+            else if (recipe.level == 5)
+                infoText.text += "Increases the total number of villagers to 50, who will produce 500 gold per hour.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Sawmill)
+        {
+            infoText.text += "Builds a sawmill that will automatically produce Wood. " +
+                "The collected wood is deposited directly into your Storage.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Quarry)
+        {
+            infoText.text += "Builds a quarry that will automatically produce Stone. " +
+                "The collected stone is deposited directly into your Storage.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Mine)
+        {
+            infoText.text += "Builds a mine that will automatically produce Iron. " +
+                "The collected iron is deposited directly into your Storage.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Farm)
+        {
+            infoText.text += "Builds a farm that will automatically produce Food and Leather. " +
+                "The collected Food and Leather are deposited directly into your Storage.";
+
+            return;
+        }
+
+        else if (recipe.recipeType == RecipeType.Market)
+        {
+            if (recipe.level == 1)
+                infoText.text += "Builds a market that allows you to sell resources in exchange for gold.";
+            else if (recipe.level == 2)
+                infoText.text += "It allows you to buy things at the market.";
+            else if (recipe.level == 3)
+                infoText.text += "Improves selling prices.";
+            else if (recipe.level == 4)
+                infoText.text += "Improves purchase prices.";
+
+            return;
+        }
     }
 }

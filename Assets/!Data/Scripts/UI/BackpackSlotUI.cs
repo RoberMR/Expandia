@@ -85,11 +85,11 @@ public class BackpackSlotUI : MonoBehaviour
         toolInfoPanelNameText.text = "Backpack Level " + level;
 
         if (level == 1)
-            toolInfoPanelDescriptionText.text = "Increases the capacity of each resource by 15.";
+            toolInfoPanelDescriptionText.text = "Allows you to carry 25 of each resource in your inventory.";
         else if (level == 2)
-            toolInfoPanelDescriptionText.text = "Increases the capacity of each resource by 25.";
+            toolInfoPanelDescriptionText.text = "Allows you to carry 50 of each resource in your inventory.";
         else if (level == 3)
-            toolInfoPanelDescriptionText.text = "Increases the capacity of each resource by 50.";
+            toolInfoPanelDescriptionText.text = "Allows you to carry 100 of each resource in your inventory.";
     }
 
     private void DeactivateAllInfoPanels()
