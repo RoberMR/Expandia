@@ -33,11 +33,16 @@ public class ConstructionUI : MonoBehaviour
 
     public void ShowRecipeDetail(CraftingRecipe recipe)
     {
+
         currentRecipe = recipe;
 
         detailPanel.SetActive(true);
         detailIcon.sprite = recipe.icon;
         detailName.text = recipe.recipeName;
+
+        if (CheckForMissingPreviousLevel(recipe))
+            return;
+
         ReturnInfoText(recipe);
         resourcesNeededText.text = "Resources needed:";
 
@@ -51,6 +56,9 @@ public class ConstructionUI : MonoBehaviour
             return;
 
         if (CheckForEquippedTool(recipe))
+            return;
+
+        if (CheckForBuiltBuilding(recipe))
             return;
 
         foreach (var cost in recipe.costs)
@@ -77,7 +85,7 @@ public class ConstructionUI : MonoBehaviour
 
     private void DeselectAllRecipeButtons()
     {
-        foreach (var btn in GetComponentsInChildren<RecipeButtonUI>())
+        foreach (var btn in GetComponentsInChildren<ConstructionRecipeButtonUI>())
             btn.buttonPressed = false;
     }
 
@@ -102,6 +110,23 @@ public class ConstructionUI : MonoBehaviour
         {
             buildButton.interactable = false;
             resourcesNeededText.text = "You already possess this item";
+
+            foreach (Transform c in costsParent)
+                Destroy(c.gameObject);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CheckForBuiltBuilding(CraftingRecipe recipe)
+    {
+        if (PlayerBuildingProgress.Instance != null &&
+            PlayerBuildingProgress.Instance.HasBuilding(recipe.recipeType, recipe.level))
+        {
+            buildButton.interactable = false;
+            resourcesNeededText.text = "You have already built this building.";
 
             foreach (Transform c in costsParent)
                 Destroy(c.gameObject);
@@ -146,6 +171,25 @@ public class ConstructionUI : MonoBehaviour
             RecipeType.Pickaxe => ToolType.Pickaxe,
             _ => throw new System.Exception("Recipe is not a tool")
         };
+    }
+
+    private bool CheckForMissingPreviousLevel(CraftingRecipe recipe)
+    {
+        if (recipe.level <= 1)
+            return false;
+
+        if (!PlayerBuildingProgress.Instance.HasBuilding(recipe.recipeType, recipe.level - 1))
+        {
+            buildButton.interactable = false;
+            resourcesNeededText.text = "You must build the previous building level first.";
+
+            foreach (Transform c in costsParent)
+                Destroy(c.gameObject);
+
+            return true;
+        }
+
+        return false;
     }
 
     private void ReturnInfoText(CraftingRecipe recipe)

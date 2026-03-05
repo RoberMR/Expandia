@@ -6,6 +6,13 @@ public class StorageBuilding : MonoBehaviour
     [SerializeField] private GameObject storageLvl1;
     [SerializeField] private GameObject storageLvl2;
     [SerializeField] private GameObject storageLvl3;
+    [SerializeField] private GameObject storageLvl4;
+    [SerializeField] private GameObject storageLvl5;
+    [SerializeField] private GameObject storageLvl6;
+    [SerializeField] private GameObject storageLvl7;
+    [SerializeField] private GameObject storageLvl8;
+    [SerializeField] private GameObject storageLvl9;
+    [SerializeField] private GameObject storageLvl10;
 
     [Header("UI")]
     [SerializeField] private StorageUI storageUI;
@@ -34,6 +41,13 @@ public class StorageBuilding : MonoBehaviour
         storageLvl1.SetActive(level == 1);
         storageLvl2.SetActive(level == 2);
         storageLvl3.SetActive(level == 3);
+        storageLvl4.SetActive(level == 4);
+        storageLvl5.SetActive(level == 5);
+        storageLvl6.SetActive(level == 6);
+        storageLvl7.SetActive(level == 7);
+        storageLvl8.SetActive(level == 8);
+        storageLvl9.SetActive(level == 9);
+        storageLvl10.SetActive(level == 10);
     }
 
     private void OnTriggerEnter(Collider other)

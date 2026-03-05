@@ -29,6 +29,8 @@ public class CraftingManager : MonoBehaviour
             return false;
         if (StorageCanCraftCheck(recipe))
             return false;
+        if (!PreviousLevelBuilt(recipe))
+            return false;
 
         if (recipe.IsTool())
         {
@@ -82,6 +84,8 @@ public class CraftingManager : MonoBehaviour
             );
         }
 
+        HandleBuildingUnlock(recipe);
+
         //Debug.Log("Crafted: " + recipe.recipeName);
     }
 
@@ -127,11 +131,70 @@ public class CraftingManager : MonoBehaviour
         if (recipe.recipeName == "Storage Level 1") newLevel = 1;
         else if (recipe.recipeName == "Storage Level 2") newLevel = 2;
         else if (recipe.recipeName == "Storage Level 3") newLevel = 3;
+        else if (recipe.recipeName == "Storage Level 4") newLevel = 4;
+        else if (recipe.recipeName == "Storage Level 5") newLevel = 5;
+        else if (recipe.recipeName == "Storage Level 6") newLevel = 6;
+        else if (recipe.recipeName == "Storage Level 7") newLevel = 7;
+        else if (recipe.recipeName == "Storage Level 8") newLevel = 8;
+        else if (recipe.recipeName == "Storage Level 9") newLevel = 9;
+        else if (recipe.recipeName == "Storage Level 10") newLevel = 10;
 
         if (newLevel > 0)
         {
             StorageManager.Instance.SetLevel(newLevel);
+
+            if (PlayerBuildingProgress.Instance != null)
+                PlayerBuildingProgress.Instance.UnlockBuilding(RecipeType.Storage, newLevel);
+
             OnStorageCrafted?.Invoke();
         }
+    }
+
+    private void HandleBuildingUnlock(CraftingRecipe recipe)
+    {
+        if (PlayerBuildingProgress.Instance == null)
+            return;
+
+        if (recipe.recipeType == RecipeType.Storage && recipe.level >= 4)
+        {
+            PlayerBuildingProgress.Instance.UnlockBuilding(recipe.recipeType, recipe.level);
+            StorageManager.Instance.SetLevel(recipe.level);
+            return;
+        }
+
+        if (recipe.recipeType == RecipeType.MyHouse ||
+            recipe.recipeType == RecipeType.VillagersHouse ||
+            recipe.recipeType == RecipeType.Sawmill ||
+            recipe.recipeType == RecipeType.Quarry ||
+            recipe.recipeType == RecipeType.Mine ||
+            recipe.recipeType == RecipeType.Farm ||
+            recipe.recipeType == RecipeType.Market)
+        {
+            PlayerBuildingProgress.Instance.UnlockBuilding(recipe.recipeType, recipe.level);
+        }
+    }
+
+    private bool PreviousLevelBuilt(CraftingRecipe recipe)
+    {
+        if (recipe.recipeType == RecipeType.Sword ||
+            recipe.recipeType == RecipeType.Axe ||
+            recipe.recipeType == RecipeType.Pickaxe ||
+            recipe.recipeType == RecipeType.Backpack ||
+            recipe.recipeType == RecipeType.Sawmill ||
+            recipe.recipeType == RecipeType.Quarry ||
+            recipe.recipeType == RecipeType.Mine ||
+            recipe.recipeType == RecipeType.Farm)
+            return true;
+
+        if (recipe.level <= 1)
+            return true;
+
+        //if (recipe.recipeType == RecipeType.Storage)
+        //{
+        //    if (recipe.level == 1 || recipe.level == 2 || recipe.level == 3)
+        //        return true;
+        //}
+
+        return PlayerBuildingProgress.Instance.HasBuilding(recipe.recipeType, recipe.level - 1);
     }
 }

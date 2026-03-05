@@ -10,13 +10,14 @@ public class ConstructionZoneInteractor : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         constructionCanvas.SetActive(true);
+        constructionCanvas.GetComponent<ConstructionUI>()?.Back();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
-        constructionCanvas.GetComponent<CraftingUI>()?.Back();
+        constructionCanvas.GetComponent<ConstructionUI>()?.Back();
         constructionCanvas.SetActive(false);
     }
 }
